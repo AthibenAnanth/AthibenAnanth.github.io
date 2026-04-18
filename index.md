@@ -30,13 +30,13 @@ show_tile: true
 
     <article>
         <span class="image">
-            <img src="assets/images/lab_log.jpg" alt="" />
+            <img src="assets/images/robotics_bg.jpg" alt="" />
         </span>
         <header class="major">
-            <h3><a href="all_posts.html" class="link">The Lab Log</a></h3>
-            <p>Daily Engineering Innovation & Technical Notes</p>
-        </header>
-    </article>
+            <h3><a href="cad-robotics.html" class="link">CAD & Robotics</a></h3>
+            <p>Generative Design, nTop Implicit Modeling, and Combat Robotics</p>
+    </header>
+</article>
 </section>
 
 <section id="two">
