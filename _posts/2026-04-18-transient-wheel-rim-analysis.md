@@ -2,6 +2,7 @@
 layout: post
 title: "Transient Structural Analysis: 680mm Performance Rim"
 date: 2026-04-18
+permalink: /wheel-analysis/
 description: "A self-directed study on high-speed rotation cycles (0-1500-800 RPM) to validate structural integrity."
 image: assets/images/wheel_stress.jpg
 ---
