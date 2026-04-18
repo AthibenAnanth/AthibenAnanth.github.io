@@ -5,19 +5,20 @@ date: 2026-04-18
 permalink: /wheel-analysis/
 description: "A self-directed study on high-speed rotation cycles (0-1500-800 RPM) to validate structural integrity and fatigue life."
 image: assets/images/wheel_stress.jpg
+mathjax: true
 ---
 
 ### The Motivation
 This project was born out of a personal curiosity about material limits during dynamic load changes. While my university coursework focuses on static equilibrium, I wanted to simulate the real-world "ramp-up" and "ramp-down" phases of a wheel's rotation to observe how inertial effects influence the stress-time history of Aluminum 6061-T6.
 
 ### The Physics of the Cycle
-The simulation covers a 2.0s transient window. The centrifugal stress $\sigma$ is governed by the angular velocity $\omega$:
+The simulation covers a 2.0s transient window. The centrifugal stress \( \sigma \) is governed by the angular velocity \( \omega \):
 
-$$\sigma \approx \rho \cdot r^2 \cdot \omega^2$$
+$$ \sigma \approx \rho \cdot r^2 \cdot \omega^2 $$
 
 To ensure accuracy in a transient environment, the solver integrates the fundamental equation of motion:
 
-$$[M]\{\ddot{u}\} + [C]\{\dot{u}\} + [K]\{u\} = \{F(t)\}$$
+$$ [M]\{\ddot{u}\} + [C]\{\dot{u}\} + [K]\{u\} = \{F(t)\} $$
 
 ### Methodology & Mesh Validation
 * **Mesh Quality:** Using the **Mesh Metric** tool, I verified that the average **Skewness** was **0.22**, with zero elements exceeding the 0.9 failure threshold. This ensures the gradients at the fillets are numerically stable.
