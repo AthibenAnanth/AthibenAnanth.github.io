@@ -1,57 +1,53 @@
 ---
-layout: home
+layout: landing
 title: Home
 landing-title: 'Athiben Ananth'
-description: null
-image: null
+description: 'Undergraduate Student at VIT | Formula 1 Engineering & FEA Enthusiast.'
+image: assets/images/wheel_stress.jpg
 author: null
 show_tile: false
 ---
-<section id="banner" class="major">
-    <div class="inner">
+<section id="one" class="tiles">
+    <article>
+        <span class="image">
+            <img src="assets/images/wheel_stress.jpg" alt="" />
+        </span>
         <header class="major">
-            <h1>Engineering the Future of Speed</h1>
+            <h3><a href="fea-hub.html" class="link">FEA Simulations</a></h3>
+            <p>Structure & Failure Analysis</p>
         </header>
-        <div class="content">
-            <p>Undergraduate Student at VIT | Formula 1 Engineering & Transient FEA Specialist.</p>
-            <ul class="actions">
-                <li><a href="#one" class="button next scrolly">Explore Projects</a></li>
-            </ul>
-        </div>
-    </div>
+    </article>
+
+    <article>
+        <span class="image">
+            <img src="assets/images/f1_telemetry.jpg" alt="" />
+        </span>
+        <header class="major">
+            <h3><a href="f1-data.html" class="link">F1 Data Science</a></h3>
+            <p>Telemetry Analysis using Python & FastF1</p>
+        </header>
+    </article>
+
+    <article>
+        <span class="image">
+            <img src="assets/images/lab_log.jpg" alt="" />
+        </span>
+        <header class="major">
+            <h3><a href="all_posts.html" class="link">The Lab Log</a></h3>
+            <p>Daily Engineering Innovation & Technical Notes</p>
+        </header>
+    </article>
 </section>
 
-<div id="main">
-    <section id="one" class="tiles">
-        <article>
-            <span class="image">
-                <img src="assets/images/wheel_stress.jpg" alt="" />
-            </span>
-            <header class="major">
-                <h3><a href="landing.html" class="link">FEA Simulations</a></h3>
-                <p>Transient Structural & Failure Analysis</p>
-            </header>
-        </article>
-
-        <article>
-            <span class="image">
-                <img src="assets/images/f1_telemetry.jpg" alt="" />
-            </span>
-            <header class="major">
-                <h3><a href="f1-data.html" class="link">F1 Data Science</a></h3>
-                <p>Telemetry Analysis using Python & FastF1</p>
-            </header>
-        </article>
-
-        <article>
-            <span class="image">
-                <img src="assets/images/lab_log.jpg" alt="" />
-            </span>
-            <header class="major">
-                <h3><a href="all_posts.html" class="link">The Lab Log</a></h3>
-                <p>Daily Engineering Innovation & Technical Notes</p>
-            </header>
-        </article>
-    </section>
-</div>
+<section id="two">
+    <div class="inner">
+        <header class="major">
+            <h2>The Desire to Optimize</h2>
+        </header>
+        <p>I am a first-year student at VIT focused on the intersection of mechanical design and high-performance computing. Whether it's a transient FEA run on a car rim or an F1 telemetry dashboard, I believe every system can be made faster, lighter, and more efficient.</p>
+        <ul class="actions">
+            <li><a href="all_posts.html" class="button next">Read the Full Log</a></li>
+        </ul>
+    </div>
+</section>
 
