@@ -1,11 +1,11 @@
 ---
 layout: landing
-title: Home
+title: Athiben Ananth
 landing-title: 'Athiben Ananth'
 description: 'Undergraduate Student at VIT | Formula 1 Engineering & FEA Enthusiast.'
 image: assets/images/wheel_stress.jpg
 author: null
-show_tile: false
+show_tile: true
 ---
 <section id="one" class="tiles">
     <article>
