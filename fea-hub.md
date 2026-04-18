@@ -17,7 +17,7 @@ image: assets/images/wheel_stress.jpg
 
     <section id="two" class="spotlights">
         <section>
-            <a href="2026-04-18-transient-wheel-rim-analysis.html" class="image">
+            <a href="wheel-analysis/" class="image">
                 <img src="assets/images/wheel_stress.jpg" alt="" data-position="center center" />
             </a>
             <div class="content">
@@ -27,7 +27,7 @@ image: assets/images/wheel_stress.jpg
                     </header>
                     <p>Simulating a 1500 RPM acceleration and braking cycle to study centrifugal stress distribution and safety factors using Aluminum 6061-T6.</p>
                     <ul class="actions">
-                        <li><a href="2026-04-18-transient-wheel-rim-analysis.html" class="button">Read Deep Dive</a></li>
+                        <li><a href="wheel-analysis/" class="button">Read Deep Dive</a></li>
                     </ul>
                 </div>
             </div>
