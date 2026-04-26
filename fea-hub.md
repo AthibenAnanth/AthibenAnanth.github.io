@@ -3,6 +3,7 @@ layout: landing
 title: FEA & Structural Analysis
 description: "Validating structural integrity through transient and static finite element methods."
 image: assets/images/wheel_stress.jpg
+permalink: /fea-hub/
 ---
 
 <div id="main">
