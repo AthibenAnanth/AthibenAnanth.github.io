@@ -1,54 +1,55 @@
-<div id="main" style="background-color: #2a2f4a; border-top: 2px solid rgba(255, 255, 255, 0.1);">
+<div id="main" style="background-color: #2a2f4a; border-top: 2px solid rgba(255, 255, 255, 0.1); padding-bottom: 3em;">
     <section id="contact">
         <div class="inner" style="padding-top: 4em;">
             <header class="major">
                 <h2>Get in Touch</h2>
             </header>
-            <section class="split">
-                <section>
-                    <div class="contact-method">
+
+            <div class="row">
+                <div class="6u 12u$(small)">
+                    <div class="contact-method" style="margin-bottom: 2em;">
                         <span class="icon alt fa-envelope"></span>
                         <h3>Email</h3>
                         <a href="mailto:{{ site.email }}">{{ site.email }}</a>
                     </div>
-                </section>
-                <section>
+                    
                     <div class="contact-method">
                         <span class="icon alt fa-home"></span>
                         <h3>Address</h3>
                         <span>
-                        {% if site.street_address %}{{ site.street_address }}<br />{% endif %}
-                        {% if site.city %}{{ site.city }},{% endif %}
-                        {% if site.state %}{{ site.state }}{% endif %}
-                        {% if site.zip_code %}{{ site.zip_code }}<br />{% endif %}
-                        {% if site.country %}{{ site.country }}{% endif %}
+                            {% if site.street_address %}{{ site.street_address }}<br />{% endif %}
+                            {{ site.city }}, {{ site.state }} {{ site.zip_code }}<br />
+                            {{ site.country }}
                         </span>
                     </div>
-                </section>
-            </section>
+                </div>
+
+                <div class="6u$ 12u$(small)">
+                    <div class="contact-method" style="margin-bottom: 2em;">
+                        <span class="icon alt fa-share-alt"></span>
+                        <h3>Connect</h3>
+                        <ul class="icons" style="margin-top: 1em;">
+                            {% for key_value in site.socials %}
+                                {% if key_value[1] %}
+                                    <li>
+                                        <a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer" aria-label="{{ key_value[0] }}">
+                                            <span class="label">{{ key_value[0] }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 4em; font-size: 0.8em; opacity: 0.5;">
+                        <p>&copy; {{ site.title }}<br />
+                        Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
-
-<footer id="footer">
-    <div class="inner">
-        <ul class="icons">
-            {% for key_value in site.socials %}
-                {% if key_value[1] %}
-                    <li>
-                        <a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer" aria-label="{{ key_value[0] }}">
-                            <span class="label">{{ key_value[0] }}</span>
-                        </a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-        <ul class="copyright">
-            <li>&copy; {{ site.title }}</li>
-            <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
-        </ul>
-    </div>
-</footer>
 
 <script src="{{ "assets/js/jquery.min.js" | absolute_url }}"></script>
 <script src="{{ "assets/js/jquery.scrolly.min.js" | absolute_url }}"></script>
