@@ -13,7 +13,7 @@ show_tile: true
             <img src="assets/images/wheel_stress.jpg" alt="" />
         </span>
         <header class="major">
-            <h3><a href="fea-hub.html" class="link">FEA Simulations</a></h3>
+            <h3><a href="/fea-hub/" class="link">FEA Simulations</a></h3>
             <p>Structure & Failure Analysis</p>
         </header>
     </article>
@@ -23,7 +23,7 @@ show_tile: true
             <img src="assets/images/f1_telemetry.jpg" alt="" />
         </span>
         <header class="major">
-            <h3><a href="f1-data.html" class="link">F1 Data Science</a></h3>
+            <h3><a href="/f1-data/" class="link">F1 Data Science</a></h3>
             <p>Telemetry Analysis using Python & FastF1</p>
         </header>
     </article>
@@ -33,7 +33,7 @@ show_tile: true
             <img src="assets/images/robotics_bg.jpg" alt="" />
         </span>
         <header class="major">
-            <h3><a href="cad-robotics.html" class="link">CAD & Robotics</a></h3>
+            <h3><a href="/cad-robotics/" class="link">CAD & Robotics</a></h3>
             <p>Generative Design, nTop Implicit Modeling, and Combat Robotics</p>
     </header>
 </article>
