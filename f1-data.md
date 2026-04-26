@@ -3,6 +3,7 @@ layout: landing
 title: F1 Data Science
 description: "Mining telemetry for the tenth of a second."
 image: assets/images/f1_telemetry.jpg
+permalink: /f1-data/
 ---
 
 <div id="main">
