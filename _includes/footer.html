@@ -1,76 +1,87 @@
 <style>
-    .contact-flex-container {
+    .hub-footer {
+        background-color: #2a2f4a; 
+        border-top: 2px solid rgba(255, 255, 255, 0.1); 
+        padding: 5em 0;
+    }
+    .hub-grid {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: row;
         justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 2em;
         margin-top: 3em;
     }
-    .contact-item {
+    .hub-column {
         flex: 1;
-        min-width: 250px; /* Ensures stacking on mobile */
+        min-width: 250px;
     }
-    .contact-section-wrapper {
-        background-color: #2a2f4a; 
-        border-top: 2px solid rgba(255, 255, 255, 0.1); 
-        padding: 4em 0;
+    .hub-column h3 {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5em;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 736px) {
+        .hub-grid { flex-direction: column; gap: 3em; }
     }
 </style>
 
-<div class="contact-section-wrapper">
-    <section id="contact">
-        <div class="inner">
+<div class="hub-footer">
+    <div class="inner">
+        <header class="major">
+            <h2>Get in Touch</h2>
+        </header>
+
+        <div class="hub-grid">
             
-            <header class="major">
-                <h2>Get in Touch</h2>
-            </header>
-
-            <div class="contact-flex-container">
-                <div class="contact-item">
-                    <div class="contact-method">
-                        <span class="icon alt fa-envelope"></span>
-                        <h3>Email</h3>
-                        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-method">
-                        <span class="icon alt fa-home"></span>
-                        <h3>Address</h3>
-                        <p style="margin-bottom: 0;">
-                            {{ site.street_address }}<br />
-                            {{ site.city }}, {{ site.state }} {{ site.zip_code }}<br />
-                            {{ site.country }}
-                        </p>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-method">
-                        <span class="icon alt fa-share-alt"></span>
-                        <h3>Connect</h3>
-                        <ul class="icons" style="margin-top: 0.5em; list-style: none; padding-left: 0;">
-                            {% for key_value in site.socials %}
-                                {% if key_value[1] %}
-                                    <li style="display: inline-block; margin-right: 1em;">
-                                        <a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer">
-                                            <span class="label">{{ key_value[0] }}</span>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-envelope"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:{{ site.email }}" style="border-bottom: none;">{{ site.email }}</a>
                 </div>
             </div>
 
-            <div style="margin-top: 5em; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2em; text-align: center; opacity: 0.4; font-size: 0.85em;">
-                <p>&copy; {{ site.title }} | Undergraduate Student @ VIT<br />
-                Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-home"></span>
+                    <h3>Location</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        {{ site.street_address }}<br />
+                        {{ site.city }}, {{ site.state }}<br />
+                        {{ site.country }}
+                    </p>
+                </div>
             </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-share-alt"></span>
+                    <h3>Connect</h3>
+                    <ul class="icons" style="margin: 0; padding: 0;">
+                        {% for social in site.socials %}
+                            {% if social[1] %}
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="{{ social[1] }}" class="icon alt fa-{{ social[0] | downcase }}" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">{{ social[0] }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
         </div>
-    </section>
+
+        <div style="margin-top: 6em; padding-top: 2em; border-top: 1px solid rgba(255, 255, 255, 0.05); opacity: 0.3; font-size: 0.8em;">
+            &copy; {{ site.title }} | {{ site.subtitle }}<br />
+            Design adapted from HTML5 UP
+        </div>
+    </div>
 </div>
 
 <script src="{{ "assets/js/jquery.min.js" | absolute_url }}"></script>
