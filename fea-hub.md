@@ -2,7 +2,7 @@
 layout: landing
 title: FEA & Structural Analysis
 description: "Validating structural integrity through transient and static finite element methods."
-image: assets/images/wheel_stress.jpg
+image: /assets/images/wheel_stress.jpg
 permalink: /fea-hub/
 ---
 
@@ -18,8 +18,8 @@ permalink: /fea-hub/
 
     <section id="two" class="spotlights">
         <section>
-            <a href="wheel-analysis/" class="image">
-                <img src="assets/images/wheel_stress.jpg" alt="" data-position="center center" />
+            <a href="/wheel-analysis/" class="image">
+                <img src="/assets/images/wheel_stress.jpg" alt="Transient Wheel Analysis" data-position="center center" />
             </a>
             <div class="content">
                 <div class="inner">
@@ -28,15 +28,15 @@ permalink: /fea-hub/
                     </header>
                     <p>Simulating a 1500 RPM acceleration and braking cycle to study centrifugal stress distribution and safety factors using Aluminum 6061-T6.</p>
                     <ul class="actions">
-                        <li><a href="wheel-analysis/" class="button">Read Deep Dive</a></li>
+                        <li><a href="/wheel-analysis/" class="button">Read Deep Dive</a></li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section>
-            <a href="hyatt-analysis.html" class="image">
-                <img src="assets/images/hyatt_fea.jpg" alt="" data-position="top center" />
+            <a href="/hyatt-analysis/" class="image">
+                <img src="/assets/images/hyatt_fea.jpg" alt="Hyatt Regency FEA" data-position="top center" />
             </a>
             <div class="content">
                 <div class="inner">
@@ -45,7 +45,7 @@ permalink: /fea-hub/
                     </header>
                     <p>A forensic engineering simulation recreating the structural failure of the 1981 collapse to analyze shear stress on the hanger rod connections.</p>
                     <ul class="actions">
-                        <li><a href="hyatt-analysis.html" class="button">View Simulation</a></li>
+                        <li><a href="/hyatt-analysis/" class="button">View Simulation</a></li>
                     </ul>
                 </div>
             </div>
