@@ -20,7 +20,7 @@ show_tile: true
 
     <article>
         <span class="image">
-            <img src="assets/images/f1_telemetry.jpg" alt="" />
+            <img src="assets/images/f1_telemetry.png" alt="" />
         </span>
         <header class="major">
             <h3><a href="/f1-data/" class="link">F1 Data Science</a></h3>
