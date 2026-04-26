@@ -6,33 +6,35 @@
             </header>
 
             <div class="row">
-                <div class="6u 12u$(small)">
-                    <div class="contact-method" style="margin-bottom: 2em;">
+                <div class="4u 12u$(small)">
+                    <div class="contact-method">
                         <span class="icon alt fa-envelope"></span>
                         <h3>Email</h3>
                         <a href="mailto:{{ site.email }}">{{ site.email }}</a>
                     </div>
-                    
+                </div>
+
+                <div class="4u 12u$(small)">
                     <div class="contact-method">
                         <span class="icon alt fa-home"></span>
                         <h3>Address</h3>
                         <span>
-                            {% if site.street_address %}{{ site.street_address }}<br />{% endif %}
+                            {{ site.street_address }}<br />
                             {{ site.city }}, {{ site.state }} {{ site.zip_code }}<br />
                             {{ site.country }}
                         </span>
                     </div>
                 </div>
 
-                <div class="6u$ 12u$(small)">
-                    <div class="contact-method" style="margin-bottom: 2em;">
+                <div class="4u$ 12u$(small)">
+                    <div class="contact-method">
                         <span class="icon alt fa-share-alt"></span>
                         <h3>Connect</h3>
-                        <ul class="icons" style="margin-top: 1em;">
+                        <ul class="icons" style="margin-top: 0.5em;">
                             {% for key_value in site.socials %}
                                 {% if key_value[1] %}
                                     <li>
-                                        <a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer" aria-label="{{ key_value[0] }}">
+                                        <a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer">
                                             <span class="label">{{ key_value[0] }}</span>
                                         </a>
                                     </li>
@@ -40,12 +42,12 @@
                             {% endfor %}
                         </ul>
                     </div>
-
-                    <div style="margin-top: 4em; font-size: 0.8em; opacity: 0.5;">
-                        <p>&copy; {{ site.title }}<br />
-                        Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
-                    </div>
                 </div>
+            </div>
+
+            <div style="margin-top: 5em; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2em; font-size: 0.8em; opacity: 0.4; text-align: center;">
+                <p>&copy; {{ site.title }} | Undergraduate Student @ VIT<br />
+                Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
             </div>
         </div>
     </section>
