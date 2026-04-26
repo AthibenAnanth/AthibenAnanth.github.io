@@ -46,7 +46,7 @@ show_tile: true
         </header>
         <p>I am a first-year student at VIT focused on the intersection of mechanical design and high-performance computing. Whether it's a transient FEA run on a car rim or an F1 telemetry dashboard, I believe every system can be made faster, lighter, and more efficient.</p>
         <ul class="actions">
-            <li><a href="all_posts.html" class="button next">Read the Full Log</a></li>
+            <li><a href="all_posts.html" class="button next">Read all posts</a></li>
         </ul>
     </div>
 </section>
