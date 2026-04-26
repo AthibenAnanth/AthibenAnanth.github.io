@@ -1,16 +1,16 @@
 # site settings
 title: Athiben Ananth | Engineering Hub
 subtitle: Undergraduate Student @ VIT
-email: youremailaddress@gmail.com
+email: athiben.ananth@gmail.com
 description: Formula 1 Engineering, FEA, Automotive Innovation, Robotics, and the desire to optimize.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://AthibenAnanth.github.io" # the base hostname & protocol for your site
 author:
-street_address: 1234 Somewhere Road
-city: Nashville
+street_address: VIT
+city: Vellore
 state: TN
-zip_code: 55555
-country: United States of America
+zip_code: 632014
+country: India
 phone: (716) 555-5555
 
 # homepage tiles
@@ -22,12 +22,11 @@ tiles-count: 6
 # Icons are not shown if value is empty
 # You need to restart jekyll for changes to have an effect
 socials:
-  GitHub: https://github.com/andrewbanchich
+  GitHub: https://github.com/AthibenAnanth
   GitLab:
-  Google-Plus: https://plus.google.com/u/0/+AndrewBanchich
+  Google-Plus: 
   Instagram:
-  LinkedIn: https://www.linkedin.com/in/andrew-banchich-a4ba1195
-  Twitter: https://twitter.com/andrewbanchich
+  LinkedIn: www.linkedin.com/in/athiben-ananth-mstrcdr110322
   Facebook:
   Slack:
 
