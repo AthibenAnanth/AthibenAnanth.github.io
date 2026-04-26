@@ -3,6 +3,7 @@ layout: landing
 title: CAD & Robotics
 description: "Exploring the limits of geometry through implicit modeling and solo robot builds."
 image: assets/images/robotics_bg.jpg
+permalink: /cad-robotics/
 ---
 
 <div id="main">
