@@ -11,7 +11,7 @@ city: Vellore
 state: TN
 zip_code: 632014
 country: India
-phone: (716) 555-5555
+phone: 
 
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
