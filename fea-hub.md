@@ -17,22 +17,22 @@ permalink: /fea-hub/
     </section>
 
     <section id="two" class="spotlights">
-        <section>
-            <a href="/wheel-analysis/" class="image">
-                <img src="/assets/images/wheel_stress.jpg" alt="Transient Wheel Analysis" data-position="center center" />
-            </a>
-            <div class="content">
-                <div class="inner">
-                    <header class="major">
-                        <h3>Transient Wheel Rim Analysis</h3>
-                    </header>
-                    <p>Simulating a 1500 RPM acceleration and braking cycle to study centrifugal stress distribution and safety factors using Aluminum 6061-T6.</p>
-                    <ul class="actions">
-                        <li><a href="/wheel-analysis/" class="button">Read Deep Dive</a></li>
-                    </ul>
-                </div>
+    <section>
+        <a href="/wheel-analysis/" class="image">
+            <img src="/assets/images/wheel_stress.jpg" alt="Wheel Stress" data-position="center center" />
+        </a>
+        <div class="content">
+            <div class="inner">
+                <header class="major">
+                    <h3>Transient Wheel Rim Analysis</h3>
+                </header>
+                <p>Simulating a 1500 RPM acceleration and braking cycle to study centrifugal stress distribution and safety factors using Aluminum 6061-T6.</p>
+                <ul class="actions">
+                    <li><a href="/wheel-analysis/" class="button">Read Deep Dive</a></li>
+                </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
         <section>
             <a href="/hyatt-analysis/" class="image">
