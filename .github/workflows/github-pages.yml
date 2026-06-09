@@ -17,6 +17,6 @@ jobs:
 
       - name: Build and Publish Site
         uses: helaili/jekyll-action@v2
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET_BRANCH: gh-pages
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target_branch: gh-pages
