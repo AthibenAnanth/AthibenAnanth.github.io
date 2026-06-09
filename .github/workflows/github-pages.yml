@@ -5,11 +5,18 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+
 jobs:
-  github-pages:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses:  helaili/jekyll-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build and Publish Site
+        uses: helaili/jekyll-action@v2
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_BRANCH: gh-pages
