@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>1-Way Fluid-Structure Interaction (FSI) Parametric Optimization of a High-Downforce Racing Wing | Athiben Ananth | Engineering Hub</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+</head>
+
+
+<body>
+
+    <div id="wrapper">
+
+<header id="header">
+    <a href="https://athibenananth.github.io/" class="logo"><strong>Athiben Ananth | Engineering Hub</strong> <span>Undergraduate Student @ VIT</span></a>
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/fea-hub/">FEA Simulations</a></li>
+        <li><a href="/f1-data/">F1 Data Science</a></li>
+        <li><a href="/cad-robotics/">CAD & Robotics</a></li>
+    </ul>
+</nav>
+
+ 
+    
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+	<div class="inner">
+		<header class="major">
+			<h1>1-Way Fluid-Structure Interaction (FSI) Parametric Optimization of a High-Downforce Racing Wing</h1>
+		</header>
+		<span class="image main"><img src="//assets/images/streamline_plot.png" alt="" /></span>
+		<h2 id="project-overview--engineering-objectives">Project Overview &amp; Engineering Objectives</h2>
+<p>In high-performance vehicle dynamics, aerodynamic surfaces must generate substantial downforce while maintaining structural integrity under extreme aerodynamic loads. Elastic deformation of an airfoil alters its effective angle of attack, leading to unpredictable aerodynamic effects.</p>
+
+<p>This project demonstrates a 1-Way Fluid-Structure Interaction (FSI) computational pipeline. By fully coupling a 3D steady-state CFD simulation to a linear structural model, the structural response of a solid Carbon Fiber racing wing section was evaluated across a operating range of 20 m/s to 55 m/s.</p>
+
+<h3 id="key-technical-focus-areas">Key Technical Focus Areas:</h3>
+<ul>
+  <li><strong>Aerodynamic Characterization:</strong> Computational Fluid Dynamics (CFD) mapping of NACA 4412 of size 250x500</li>
+  <li><strong>1-Way Load Interpolation:</strong> Surface mesh mapping to accurately transfer fluid pressure matrices to structural elements.</li>
+  <li><strong>Parametric Optimization:</strong> Automated multi-design-point sweeping to evaluate structural scaling under aerodynamic force.</li>
+</ul>
+
+<hr />
+
+<h2 id="computational-workflow-architecture">Computational Workflow Architecture</h2>
+<p>To execute the coupled simulation, a dual-domain pipeline was constructed inside Ansys Workbench, linking a finite volume fluid solver directly to a finite element structural solver.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Fluid Domain: Fluent] ---&gt; (Pressure Data Transfer) ---&gt; [Structural Domain: Mechanical]
+</code></pre></div></div>
+
+<p align="center">
+  <img src="/assets/images/process_diagram.png" alt="Ansys FSI Workflow Schematic" width="75%" />
+  <br /><em>Figure 1: The project schematic showing the automated transfer topology where pressure cells from the Fluent solution are shared with the Static Structural setup cell.</em>
+</p>
+
+<hr />
+
+<h2 id="aerodynamic-performance-analysis-cfd">Aerodynamic Performance Analysis (CFD)</h2>
+
+<h3 id="fluid-domain-setup">Fluid Domain Setup:</h3>
+<ul>
+  <li><strong>Solver:</strong> Pressure-Based Finite Volume Solver.</li>
+  <li><strong>Turbulence Modeling:</strong> Enhanced turbulence solver to capture adverse pressure gradients along the aft portion of the chord.</li>
+  <li><strong>Mesh Resolution:</strong> 880,000-cell fluid enclosure featuring a refined wake inflation layer to resolve vortex shedding trailing edge characteristics.</li>
+</ul>
+
+<h3 id="mesh-discretization-domain-sizing-and-inflation-strategy">Mesh Discretization: Domain Sizing and Inflation Strategy</h3>
+<p>The accuracy of this FSI analysis relied heavily on a well-meshed grid across both physics domains. For the aerodynamic domain, a finite volume mesh of approximately 880,000 cells was generated within the fluid enclosure. Global element sizing was tightly managed, with a localized body sizing constraint applied around the airfoil to capture high-velocity gradients. A structured boundary layer inflation profile was embedded along the active wing skin, utilizing 10 layers with a 1.25 geometric growth rate to guarantee tight boundary-layer resolution and accurate suction-surface pressure mapping.</p>
+
+<p>For the structural simulation, hex-dominant mesh was selected to handle the solid body volume. The element sizing was parametrically altered, transitioning from an initial fine 4 mm grid down to a relatively bigger 12 mm grid. This strategic sizing shift drastically reduced the node count to fit comfortably within transfer licensing limits {student license} while perfectly preserving the geometric curvature of the nose and capturing the peak bending stress gradients at the cantilevered root joint.</p>
+
+<h3 id="velocity-field-profile">Velocity Field Profile:</h3>
+<p>As fluid approaches the leading edge, it splits, forcing high-velocity flow lines along the lower camber of the wing profile. This local velocity acceleration generates a massive localized drop in static pressure according to Bernoulli’s principle.</p>
+
+<p align="center">
+  <img src="/assets/images/streamline_plot.png" alt="Velocity field streamlines" width="85%" />
+  <br /><em>Figure 2: Velocity streamlines wrapping around the airfoil profile, illustrating localized acceleration underneath the main element belly to maximize lift-inversion (downforce).</em>
+</p>
+
+<h3 id="surface-pressure-mapping">Surface Pressure Mapping:</h3>
+<p>At the baseline velocity of 40 m/s, the aerodynamic profile produces a crisp, high-resolution pressure gradient. The upper surface exhibits positive stagnation pressure, while the lower suction surface experiences a deep negative pressure plunge.</p>
+
+<p align="center">
+  <img src="/assets/images/pressure_plot.png" alt="Surface Pressure Mapping" width="85%" />
+  <br /><em>Figure 3: High-resolution 3D surface pressure mapping from the Fluent database. Stagnation fields peak at +932.75 Pa at the leading-edge nose (red), while suction forces drop to a massive peak vacuum of -3,150.7 Pa along the lower surface (blue).</em>
+</p>
+
+<hr />
+
+<h2 id="structural-failure--rigidity-analysis-fea">Structural Failure &amp; Rigidity Analysis (FEA)</h2>
+
+<h3 id="structural-model-configuration">Structural Model Configuration:</h3>
+<ul>
+  <li><strong>Material Assignment:</strong> Continuous Solid Carbon Fiber Composite(230 GPa).</li>
+</ul>
+
+<h3 id="boundary-conditions">Boundary Conditions:</h3>
+<ul>
+  <li><strong>Fixed Support (Root):</strong> A 100% rigid cantilevered boundary condition was assigned to the flat root mounting face, replicating a center-pylon integration.</li>
+  <li><strong>Imported Aerodynamic Load:</strong> The 3D continuous pressure matrix from the fluid wall boundary was successfully interpolated across the mechanical surface elements.</li>
+</ul>
+
+<h3 id="displacement-results">Displacement Results:</h3>
+<p>Under the peak downforce condition, structural deflection is heavily concentrated at the unconstrained wingtip.</p>
+
+<p align="center">
+  <img src="/assets/images/deformation_plot.png" alt="Total Deformation Distribution" width="85%" />
+  <br /><em>Figure 4: Total deformation distribution under peak aerodynamic loading. Deflection tracks perfectly with standard cantilevered beam formulas, maximizing at the outboard tip edge.</em>
+</p>
+
+<h3 id="von-mises-stress-analysis">Von-Mises Stress Analysis:</h3>
+<p>Internal mechanical stresses propagate through the core geometry, concentrating at the sharp root constraints where the structural bending moment is highest.</p>
+
+<p align="center">
+  <img src="/assets/images/stress_plot.png" alt="Equivalent von-Mises Stress Fields" width="85%" />
+  <br /><em>Figure 5: Equivalent von-Mises stress fields. The peak stress concentration occurs directly at the root-support geometric junction (red), safely dissipating into the solid main body.</em>
+</p>
+
+<hr />
+
+<h2 id="parametric-sweep--scaling-verification">Parametric Sweep &amp; Scaling Verification</h2>
+<p>By assigning velocity as an input parameter and downforce, deflection, and stress as output variables, Workbench automated an 8-point design sweep. This mapped out the complete structural performance trajectory of the wing element across its physical operating range.</p>
+
+<h3 id="compiled-project-data-matrix">Compiled Project Data Matrix</h3>
+
+<p align="center">
+  <img src="/assets/images/final_result.png" alt="Parametric Sweep Data Matrix" width="85%" />
+  <br /><em>Figure 6: The completed Workbench parametric matrix showcasing data across all design speeds.</em>
+</p>
+
+<hr />
+
+<h2 id="aerodynamic--structural-scaling-curves">Aerodynamic &amp; Structural Scaling Curves</h2>
+<p>To map out the discrete behavioral relationships across our system variables, the coupled outputs from the design sweep points were compiled into performance curves.</p>
+
+<p align="center">
+  <img src="/assets/images/fsi_performance_curves_matched.png" alt="FSI Performance Scaling Curves" width="90%" />
+  <br /><em>Figure 7: Parametric scaling plots charting Max Total Deformation, Max Equivalent Von-Mises Stress, and Aerodynamic Downforce across the operating velocity spectrum.</em>
+</p>
+
+<ul>
+  <li><strong>Max Deflection vs. Velocity:</strong> Visualizes the structural deflection gradient, showing a smooth exponential rise to the peak value of 0.125 mm at 55 m/s.</li>
+  <li><strong>Max Von-Mises Stress vs. Velocity:</strong> Highlights the internal mechanical stress response tracking alongside increasing airspeed up to the 0.853 MPa threshold.</li>
+  <li><strong>Aerodynamic Downforce Scaling:</strong> Explicitly captures the quadratic downforce validation trajectory, confirming the fluid model accurately tracks classical physics relationships before structural mesh mapping.</li>
+</ul>
+
+<hr />
+
+<h2 id="comprehensive-engineering-insights">Comprehensive Engineering Insights</h2>
+
+<h3 id="1-quadratic-force-translation">1. Quadratic Force Translation</h3>
+<p>The aerodynamic downforce vector scales quadratically relative to velocity according to the standard relationship:
+\(F_d = \frac{1}{2} \rho V^2 C_d A\)</p>
+
+<p>Because the solid carbon fiber matrix remains within its linear elastic region, the mechanical simulation matches this behavior perfectly. When the vehicle speed climbs from 20 m/s to 55 m/s (a <strong>2.75x</strong> increase), the max internal stress increases by a factor of <strong>7.48x</strong> (<strong>0.114 MPa</strong> to <strong>0.853 MPa</strong>), matching the predictable <strong>2.75²</strong> exponential scaling.</p>
+
+<h3 id="2-high-performance-structural-stiffness">2. High-Performance Structural Stiffness</h3>
+<p>At the absolute peak operating speed of 55 m/s (~200 km/h or 123 mph), the wing element experiences a maximum structural deflection of only 0.125 mm at the outboard tip. This tiny deflection value confirms that a solid carbon fiber layout delivers immense structural rigidity, preventing any adverse twisting that could cause aerodynamic stalling.</p>
+
+<h3 id="3-ultimate-safety-factor-evaluation">3. Ultimate Safety Factor Evaluation</h3>
+<p>The peak equivalent stress observed under full velocity loading is 0.853 MPa. High-quality motorsport-grade carbon fiber laminates typically boast an ultimate tensile strength exceeding 500–1000 MPa. This confirms that this solid geometry baseline operates with an exceptionally conservative factor of safety, opening up substantial opportunities to optimize the wing through topological lightweighting or shell hollow-coring in future designs.</p>
+
+<hr />
+
+<h2 id="data-pipeline-troubleshooting--management">Data Pipeline Troubleshooting &amp; Management</h2>
+<p>A critical component of this engineering study involved managing the shared geometry upstream data pipeline across conflicting physics solvers:</p>
+
+<ul>
+  <li><strong>The Challenge:</strong> Activating the solid physics parameters for FEA mechanical meshing introduced an unhandled boundary intersecting the background fluid enclosure mesh, causing a global downstream data invalidation error across the design points.</li>
+  <li><strong>The Resolution:</strong> Implemented selective Mesh Component Suppression Filters within the separate solvers. The fluid solver was instructed to mesh only the hollow enclosure cavity while suppressing the solid wing body. Conversely, the structural solver was locked to mesh only the solid body volume while suppressing the enclosure.</li>
+  <li><strong>Future Best Practice:</strong> To fully decouple upstream CAD modifications from downstream sweeps, future iterations will implement boundary-face Named Selections directly within the geometry interface. This isolates the data-transfer pipeline and allows for quick material or mesh updates without triggering full fluid domain recalculations.</li>
+</ul>
+
+	</div>
+</section>
+
+</div>
+
+    <style>
+    .hub-footer {
+        background-color: #2a2f4a; 
+        border-top: 2px solid rgba(255, 255, 255, 0.1); 
+        padding: 5em 0;
+    }
+    .hub-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2em;
+        margin-top: 3em;
+    }
+    .hub-column {
+        flex: 1;
+        min-width: 250px;
+    }
+    .hub-column h3 {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5em;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 736px) {
+        .hub-grid { flex-direction: column; gap: 3em; }
+    }
+</style>
+
+<div class="hub-footer">
+    <div class="inner">
+        <header class="major">
+            <h2>Get in Touch</h2>
+        </header>
+
+        <div class="hub-grid">
+            
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-envelope"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:athiben.ananth@gmail.com" style="border-bottom: none;">athiben.ananth@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-home"></span>
+                    <h3>Location</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        VIT<br />
+                        Vellore, Tamil Nadu<br />
+                        India
+                    </p>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-share-alt"></span>
+                    <h3>Connect</h3>
+                    <ul class="icons" style="margin: 0; padding: 0;">
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://github.com/AthibenAnanth" class="icon alt fa-github" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">GitHub</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://linkedin.com/in/athiben-ananth-mstrcdr110322" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">LinkedIn</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 6em; padding-top: 2em; border-top: 1px solid rgba(255, 255, 255, 0.05); opacity: 0.3; font-size: 0.8em;">
+            &copy; Athiben Ananth | Engineering Hub | Undergraduate Student @ VIT<br />
+            Design adapted from HTML5 UP
+        </div>
+    </div>
+</div>
+
+<script src="https://athibenananth.github.io/assets/js/jquery.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/skel.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/util.js"></script>
+<script src="https://athibenananth.github.io/assets/js/main.js"></script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Transient Structural Analysis: 680mm Performance Rim | Athiben Ananth | Engineering Hub</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+</head>
+
+
+<body>
+
+    <div id="wrapper">
+
+<header id="header">
+    <a href="https://athibenananth.github.io/" class="logo"><strong>Athiben Ananth | Engineering Hub</strong> <span>Undergraduate Student @ VIT</span></a>
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/fea-hub/">FEA Simulations</a></li>
+        <li><a href="/f1-data/">F1 Data Science</a></li>
+        <li><a href="/cad-robotics/">CAD & Robotics</a></li>
+    </ul>
+</nav>
+
+ 
+    
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+	<div class="inner">
+		<header class="major">
+			<h1>Transient Structural Analysis: 680mm Performance Rim</h1>
+		</header>
+		<span class="image main"><img src="/assets/images/wheel_stress.jpg" alt="" /></span>
+		<h3 id="the-motivation">The Motivation</h3>
+<p>This project was born out of a personal curiosity about material limits during dynamic load changes. While my university coursework focuses on static equilibrium, I wanted to simulate the real-world “ramp-up” and “ramp-down” phases of a wheel’s rotation to observe how inertial effects influence the stress-time history of Aluminum 6061-T6.</p>
+
+<h3 id="the-physics-of-the-cycle">The Physics of the Cycle</h3>
+<p>The simulation covers a 2.0s transient window. The centrifugal stress ( \sigma ) is governed by the angular velocity ( \omega ):</p>
+
+\[\sigma \approx \rho \cdot r^2 \cdot \omega^2\]
+
+<p>To ensure accuracy in a transient environment, the solver integrates the fundamental equation of motion:</p>
+
+\[[M]\{\ddot{u}\} + [C]\{\dot{u}\} + [K]\{u\} = \{F(t)\}\]
+
+<h3 id="methodology--mesh-validation">Methodology &amp; Mesh Validation</h3>
+<ul>
+  <li><strong>Mesh Quality:</strong> Using the <strong>Mesh Metric</strong> tool, I verified that the average <strong>Skewness</strong> was <strong>0.22</strong>, with zero elements exceeding the 0.9 failure threshold. This ensures the gradients at the fillets are numerically stable.</li>
+  <li><strong>Stress Probing:</strong> Rather than just looking at global maximums, I placed a <strong>Stress Probe</strong> at the high-stress spoke-root interface to capture the exact stress-time history throughout the 1500 RPM cycle.</li>
+</ul>
+
+<h3 id="key-data--results">Key Data &amp; Results</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Result</th>
+      <th style="text-align: left">Engineering Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Peak Von-Mises Stress</strong></td>
+      <td style="text-align: left">55.37 MPa</td>
+      <td style="text-align: left">Occurred at the 1.0s peak velocity.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Total Deformation</strong></td>
+      <td style="text-align: left">15.8 $\mu$m</td>
+      <td style="text-align: left">Global radial expansion of the rim bed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Fatigue Life (Cycles)</strong></td>
+      <td style="text-align: left">$&gt; 1 \times 10^8$</td>
+      <td style="text-align: left">Estimated using the Ansys Fatigue Tool (S-N Curve).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Safety Factor (Yield)</strong></td>
+      <td style="text-align: left">8.18</td>
+      <td style="text-align: left">Based on $S_y = 276 \text{ MPa}$ for Al 6061-T6.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="conclusion-data-interpretation">Conclusion: Data Interpretation</h3>
+<p>The <strong>Total Deformation</strong> of 15.8 $\mu$m is negligible, confirming the rim retains its geometric intent under centrifugal load. However, the <strong>Stress Probe</strong> data reveals that the stress follows the $\omega^2$ curve almost perfectly, with no significant lagging from damping ($[C]$).</p>
+
+<p>With a fatigue life exceeding $10^8$ cycles at 55 MPa, the component is effectively in the “infinite life” regime for this load case. This suggests that the current design is <strong>conservative</strong>; we could reduce the spoke thickness by 20% to lower unsprung mass while still maintaining a safe margin for lateral cornering impacts.</p>
+
+<h3 id="personal-reflection-what-i-learnt">Personal Reflection: What I Learnt</h3>
+<p>Building this project outside of my EIM class taught me three critical things:</p>
+<ol>
+  <li><strong>The Solver is a Tool:</strong> I initially had a mesh that was too coarse, leading to “stress singularities.” Learning to use Mesh Metrics like Skewness taught me to question the computer’s output.</li>
+  <li><strong>Time-Stepping Matters:</strong> In my first run, I used too few sub-steps, and the results didn’t capture the peak stress correctly. I learnt that transient analysis requires a balance between computational cost and temporal resolution.</li>
+  <li><strong>The Engineering Mindset:</strong> Designing for “static” strength isn’t enough for high-performance automotive parts. Moving from yield analysis to <strong>Fatigue Life</strong> estimation changed how I look at material selection.</li>
+</ol>
+
+<hr />
+<p><em>Note: This simulation is a personal project focusing on FEA workflows.</em></p>
+
+	</div>
+</section>
+
+</div>
+
+    <style>
+    .hub-footer {
+        background-color: #2a2f4a; 
+        border-top: 2px solid rgba(255, 255, 255, 0.1); 
+        padding: 5em 0;
+    }
+    .hub-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2em;
+        margin-top: 3em;
+    }
+    .hub-column {
+        flex: 1;
+        min-width: 250px;
+    }
+    .hub-column h3 {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5em;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 736px) {
+        .hub-grid { flex-direction: column; gap: 3em; }
+    }
+</style>
+
+<div class="hub-footer">
+    <div class="inner">
+        <header class="major">
+            <h2>Get in Touch</h2>
+        </header>
+
+        <div class="hub-grid">
+            
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-envelope"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:athiben.ananth@gmail.com" style="border-bottom: none;">athiben.ananth@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-home"></span>
+                    <h3>Location</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        VIT<br />
+                        Vellore, Tamil Nadu<br />
+                        India
+                    </p>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-share-alt"></span>
+                    <h3>Connect</h3>
+                    <ul class="icons" style="margin: 0; padding: 0;">
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://github.com/AthibenAnanth" class="icon alt fa-github" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">GitHub</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://linkedin.com/in/athiben-ananth-mstrcdr110322" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">LinkedIn</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 6em; padding-top: 2em; border-top: 1px solid rgba(255, 255, 255, 0.05); opacity: 0.3; font-size: 0.8em;">
+            &copy; Athiben Ananth | Engineering Hub | Undergraduate Student @ VIT<br />
+            Design adapted from HTML5 UP
+        </div>
+    </div>
+</div>
+
+<script src="https://athibenananth.github.io/assets/js/jquery.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/skel.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/util.js"></script>
+<script src="https://athibenananth.github.io/assets/js/main.js"></script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+</body>
+
+</html>
