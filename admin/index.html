@@ -6,16 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Content Manager</title>
-    
-    <!-- Explicitly links the configuration file so the browser doesn't lose it -->
     <link href="config.yml" type="text/yaml" rel="cms-config-url" />
-    
-    <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^4.0.0/dist/main.css" />
   </head>
   <body>
-    <script src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
-    <script>
-      window.CMS.init();
-    </script>
+    <!-- This single script replaces the entire Static CMS engine -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
   </body>
 </html>
