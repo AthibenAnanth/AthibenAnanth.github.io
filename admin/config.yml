@@ -1,21 +1,20 @@
-backend:
-  name: github
-  repo: AthibenAnanth/AthibenAnanth.github.io
-  branch: master
-
-media_folder: "assets/images"
-public_folder: "/assets/images"
-
 collections:
   - name: "projects"
-    label: "Engineering Projects"
+    label: "Portfolio & Blogs"
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {
+          label: "Content Type", 
+          name: "category", 
+          widget: "select", 
+          options: ["Engineering Project", "Simulation Log", "F1 Telemetry Analysis"], 
+          default: "F1 Telemetry Analysis"
+        }
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Data Plot / Featured Image", name: "image", widget: "image", required: false}
       - {label: "Permalink", name: "permalink", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
