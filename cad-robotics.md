@@ -17,37 +17,30 @@ permalink: /cad-robotics/
     </section>
 
     <section id="two" class="spotlights">
-        <section>
-            <a href="ntop-lattices.html" class="image">
-                <img src="assets/images/ntop_preview.jpg" alt="" data-position="center center" />
-            </a>
-            <div class="content">
-                <div class="inner">
-                    <header class="major">
-                        <h3>nTop Implicit Modeling</h3>
-                    </header>
-                    <p>Moving beyond B-rep/Parametric CAD. Here I explore field-driven design and lightweighting for automotive components.</p>
-                    <ul class="actions">
-                        <li><a href="ntop-lattices.html" class="button">View Project</a></li>
-                    </ul>
+        {% for post in site.posts %}
+            {% if post.category == 'Simulation Log' %}
+            <section>
+                <a href="{{ post.url | relative_url }}" class="image">
+                    {% if post.image and post.image != "" %}
+                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" data-position="center center" />
+                    {% else %}
+                    <!-- Fallback image if you forget to upload one in the CMS -->
+                    <img src="{{ '/assets/images/robotics_bg.jpg' | relative_url }}" alt="Default" data-position="center center" />
+                    {% endif %}
+                </a>
+                <div class="content">
+                    <div class="inner">
+                        <header class="major">
+                            <h3>{{ post.title }}</h3>
+                        </header>
+                        <p>{{ post.description }}</p>
+                        <ul class="actions">
+                            <li><a href="{{ post.url | relative_url }}" class="button">Read Project</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section>
-            <a href="robot-wars.html" class="image">
-                <img src="assets/images/robot_preview.jpg" alt="" data-position="top center" />
-            </a>
-            <div class="content">
-                <div class="inner">
-                    <header class="major">
-                        <h3>Solo Robot Wars Project</h3>
-                    </header>
-                    <p>A full-stack build including mechanical design, drivetrain optimization, and electronics for competitive combat robotics in India.</p>
-                    <ul class="actions">
-                        <li><a href="robot-wars.html" class="button">Build Log</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            </section>
+            {% endif %}
+        {% endfor %}
     </section>
 </div>
