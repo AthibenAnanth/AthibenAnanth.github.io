@@ -18,7 +18,7 @@ permalink: /cad-robotics/
 
     <section id="two" class="spotlights">
         {% for post in site.posts %}
-            {% if post.category == 'Simulation Log' %}
+            {% if post.category == 'CAD and Robotics' %}
             <section>
                 <a href="{{ post.url | relative_url }}" class="image">
                     {% if post.image and post.image != "" %}
