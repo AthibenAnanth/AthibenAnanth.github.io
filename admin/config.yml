@@ -15,11 +15,11 @@ collections:
     fields:
       - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
       - {
-          label: "Content Type", 
-          name: "category", 
-          widget: "select", 
-          options: ["Engineering Project", "Simulation Log", "F1 Telemetry Analysis"], 
-          default: "F1 Telemetry Analysis"
+              label: "Content Type", 
+              name: "category", 
+              widget: "select", 
+              options: ["Engineering Project", "CAD and Robotics", "F1 Telemetry Analysis"], 
+              default: "Engineering Project"
         }
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
