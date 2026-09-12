@@ -20,9 +20,12 @@ permalink: /fea-hub/
         {% for post in site.posts %}
             {% if post.category == 'Engineering Project' %}
             <section>
-                <a href="{{ site.baseurl }}{{ post.url }}" class="image">
-                    {% if post.image %}
-                    <img src="{{ site.baseurl }}{{ post.image }}" alt="{{ post.title }}" data-position="center center" />
+                <a href="{{ post.url | relative_url }}" class="image">
+                    {% if post.image and post.image != "" %}
+                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" data-position="center center" />
+                    {% else %}
+                    <!-- Fallback image if you forget to upload one in the CMS -->
+                    <img src="{{ '/assets/images/wheel_stress.jpg' | relative_url }}" alt="Default" data-position="center center" />
                     {% endif %}
                 </a>
                 <div class="content">
@@ -32,7 +35,7 @@ permalink: /fea-hub/
                         </header>
                         <p>{{ post.description }}</p>
                         <ul class="actions">
-                            <li><a href="{{ site.baseurl }}{{ post.url }}" class="button">Read Deep Dive</a></li>
+                            <li><a href="{{ post.url | relative_url }}" class="button">Read Deep Dive</a></li>
                         </ul>
                     </div>
                 </div>
