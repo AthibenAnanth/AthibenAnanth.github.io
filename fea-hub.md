@@ -5,6 +5,14 @@ description: "Validating structural integrity through transient and static finit
 image: /assets/images/wheel_stress.jpg
 permalink: /fea-hub/
 ---
+<style>
+  .spotlights > section > .image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center;
+  }
+</style>
 
 <div id="main">
     <section id="one">
