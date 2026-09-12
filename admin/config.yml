@@ -1,3 +1,11 @@
+backend:
+  name: github
+  repo: AthibenAnanth/AthibenAnanth.github.io
+  branch: master
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
 collections:
   - name: "projects"
     label: "Portfolio & Blogs"
