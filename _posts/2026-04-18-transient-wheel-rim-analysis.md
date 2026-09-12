@@ -1,5 +1,6 @@
 ---
 layout: post
+category: Engineering Project
 title: 'Transient Structural Analysis: 680mm Performance Rim'
 description: A study on high-speed rotation (0-1500-800 RPM) to understand structural integrity and fatigue life.
 image: assets/images/wheel_stress.jpg
