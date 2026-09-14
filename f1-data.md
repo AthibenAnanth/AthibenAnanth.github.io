@@ -6,6 +6,15 @@ image: assets/images/f1_telemetry.jpg
 permalink: /f1-data/
 ---
 
+<style>
+  .spotlights > section > .image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center;
+  }
+</style>
+
 <div id="main">
     <section id="one">
         <div class="inner">
@@ -16,27 +25,31 @@ permalink: /f1-data/
         </div>
     </section>
 
-    <section>
-  <div class="inner">
-    <h2>Recent Telemetry Analysis</h2>
-    <div class="posts">
-      {% for post in site.posts %}
-        {% if post.category == 'F1 Telemetry Analysis' %}
-          <article>
-            <header>
-              <h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
-            </header>
-            {% if post.image %}
-              <a href="{{ site.baseurl }}{{ post.url }}" class="image fit"><img src="{{ site.baseurl }}{{ post.image }}" alt="" /></a>
+    <section id="two" class="spotlights">
+        {% for post in site.posts %}
+            {% if post.category == 'F1 Telemetry Analysis' %}
+            <section>
+                <a href="{{ post.url | relative_url }}" class="image">
+                    {% if post.image and post.image != "" %}
+                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" data-position="center center" />
+                    {% else %}
+                    <!-- Fallback image if you forget to upload one in the CMS -->
+                    <img src="{{ '/assets/images/f1_telemetry.jpg' | relative_url }}" alt="Default" data-position="center center" />
+                    {% endif %}
+                </a>
+                <div class="content">
+                    <div class="inner">
+                        <header class="major">
+                            <h3>{{ post.title }}</h3>
+                        </header>
+                        <p>{{ post.description }}</p>
+                        <ul class="actions">
+                            <li><a href="{{ post.url | relative_url }}" class="button">Read Deep Dive</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
             {% endif %}
-            <p>{{ post.description }}</p>
-            <ul class="actions">
-              <li><a href="{{ site.baseurl }}{{ post.url }}" class="button">Read More</a></li>
-            </ul>
-          </article>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
+        {% endfor %}
+    </section>
 </div>
