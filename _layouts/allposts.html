@@ -25,7 +25,10 @@
 	    <h1>{{ post.title }}</h1>
 	  </header>
 	  {% if post.image %}<span class="image main"><img src="{{ site.baseurl }}/{{ post.image }}" alt="" /></span>{% endif %}
-	  {% if post.date %}<p>{{ post.date }}</p>{% endif %}
+	  {% if post.date %}
+		<p style="opacity: 0.7; font-size: 0.9em; margin-top: -1em; letter-spacing: 1px;">
+		  POSTED ON {{ page.date | date: "%B %-d, %Y" | upcase }}
+		</p>{% endif %}
 	  <p>{{ post.content }}</p>
 	  {% endif %}
           {% endfor %}
