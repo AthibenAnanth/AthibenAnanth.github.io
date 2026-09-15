@@ -37,27 +37,27 @@
 <!-- CMS Image & Caption Automation -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Find all images inside the post body
-    const postImages = document.querySelectorAll("section#one .inner p img");
+    // Find ALL images inside the post body
+    const postImages = document.querySelectorAll("section#one .inner img");
     
     postImages.forEach(img => {
-      // 1. Center the paragraph containing the image
-      const p = img.parentElement;
-      p.style.textAlign = "center";
+      // Skip the main featured banner image at the top of the page
+      if (img.parentElement.classList.contains("image") && img.parentElement.classList.contains("main")) return;
       
-      // 2. Set image width (matching your preferred 85%)
+      // Force the image to become a centered block, even if it's inside a bullet point
+      img.style.display = "block";
       img.style.maxWidth = "85%";
       img.style.height = "auto";
-      img.style.margin = "0 auto";
-      img.style.display = "inline-block";
+      img.style.margin = "2rem auto 0.5rem auto";
       
-      // 3. If a "Title" was entered in the CMS, generate the italic caption
+      // Generate the italic caption from the Title field
       if (img.title) {
         const caption = document.createElement("span");
-        caption.innerHTML = "<br><em>" + img.title + "</em>";
+        caption.innerHTML = "<em>" + img.title + "</em>";
         caption.style.display = "block";
-        caption.style.marginTop = "5px";
-        caption.style.opacity = "0.8"; // Slightly dims text to match theme
+        caption.style.textAlign = "center";
+        caption.style.opacity = "0.8";
+        caption.style.marginBottom = "2rem";
         img.insertAdjacentElement("afterend", caption);
       }
     });
