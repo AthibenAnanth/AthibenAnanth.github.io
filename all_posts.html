@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  -->
+<html>
+
+  <head>
+	<title>All posts | Athiben Ananth | Engineering Hub</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+</head>
+
+
+  <body>
+
+    <div id="wrapper">
+
+<header id="header">
+    <a href="https://athibenananth.github.io/" class="logo"><strong>Athiben Ananth | Engineering Hub</strong> <span>Undergraduate Student @ VIT</span></a>
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/fea-hub/">FEA Simulations</a></li>
+        <li><a href="/f1-data/">F1 Data Science</a></li>
+        <li><a href="/cad-robotics/">CAD & Robotics</a></li>
+    </ul>
+</nav>
+
+ 
+    
+    
+    <!-- Main -->
+    <div id="main" class="alt">
+
+      <!-- One -->
+      <section id="one">
+	<div class="inner">
+          
+	  
+	  <header class="major">
+	    <h1>Custom F1 Telemetry analysis tool using FastF1 Database</h1>
+	  </header>
+	  <span class="image main"><img src="//assets/images/f1_telemetry.png" alt="" /></span>
+	  
+		  <p style="opacity: 0.7; font-size: 0.9em; margin-top: -1em; letter-spacing: 1px;">
+		    POSTED ON 
+		  </p>
+		
+	  <p><h3 id="the-objective">The Objective</h3>
+
+<p>I enjoy watching Formula 1 and the technical side of things always interests me, I actively look out for telemetry in the live broadcast and post race analysis available online in multiple forms. This got me thinking, could i make a tool that can help me retrieve and visualize data for me to understand.</p>
+
+<h3 id="the-code-architecture">The Code Architecture:</h3>
+
+<ul>
+  <li>Framework and UI: I used streamlit for this, it was relatively easier to understand and gave very clean lookign UIs.</li>
+  <li>Data &amp; processing: I looked at many sources for data, after a little bit of research i was left with 2 options, FastF1 and OpenF1, I decided to use FastF1 mainly because I wanted to be able to run the project offline with cached data instead of API calls, I would have loved to have access to live telemetry during the race but OpenF1 restricts the number of calls per min on the free plan.</li>
+  <li>Visualization: Using Plotly I was able to make graphs and other data visualization techniques.</li>
+</ul>
+
+<h3 id="the-analytical-modules">The Analytical Modules</h3>
+
+<p>For ease of programming, each major statistic was made into its own “Module”, thus far I have implemented 5 Major modules, these cover a wide array of data from lap by lap data to race pace and stint data.</p>
+
+<ul>
+  <li>Module 1: Lap telemetry and time delta mapping:</li>
+  <li>This module focuses mainly on comparison of basic telemetry like speed, brake %, throttle % etc, this data is visualized with plots against time to clearly observe how it varies thru a lap. The extreme values are also shown to get a idea of the range.A calculated statistic from this would be the plot of time delta across a lap. I can analyze up to 6 different laps from any session any driver simultaneously,  this helps visualize how factors like driver confidence, set up changes etc effect lap time across sessions.  <img src="/assets/images/nor_vs_ant_SPA_Q.png" alt="" title="Ananlysis of Norris's and Antonelli's qualifying laps in Q3 of the new spanish grand prix where norris almost lost a huge 0.35+s lead in the last corner leading to a total delta of 0.011s" /></li>
+  <li>Module 2: Track dominance:
+    <ul>
+      <li>I’ve always looked at the track domination images, especially in 26, we can clearly see how dominant Ferrari are in the corners due to a superior chassis yet they loose out on straight line power to Mercedes due to a weaker power unit.</li>
+      <li>The script calculates the highest average speed in each sector and maps the dominant driver to the geometric track layout, instantly highlighting which car favors high-speed corners versus heavy traction zones.</li>
+      <li>This also lets us visualize how much the drivers are pushing and at what location are they most comfortable in doing so.</li>
+    </ul>
+  </li>
+  <li>Module 3: Track Position across lap:
+    <ul>
+      <li>This module takes GPS coords and maps it across the lap, this is very useful to check visually which driver is ahead where and where the driver is loosing most of their time to their rivals.</li>
+      <li>Since we can control the time along the lap, we can freeze it at any point and check out the difference between the laps.</li>
+    </ul>
+  </li>
+  <li>Module 4: Advanced Lap &amp; Corner Metrics:
+    <ul>
+      <li>This section is probably the most fascinating, it gives us a deeper look into the lap by lap differences. It also shows basic lap and tyre data like compound, tyre life, sector times etc.</li>
+      <li>Each lap has a detailed breakdown, this includes statistics like:
+        <ul>
+          <li>Apex speeds at different corners</li>
+          <li>Time to 100% throttle</li>
+          <li>Total time spent braking</li>
+          <li>Avg L&amp;C time ( transition btwn braking and trottle)</li>
+          <li>Max &amp; Min recorded speed</li>
+        </ul>
+      </li>
+      <li>It also shows a 0-200 time for starting laps, this was very useful to visualize the superior starts by Ferrari due to a smaller turbo and faster spool up time which gave them very good speeds into turn 1.</li>
+    </ul>
+  </li>
+  <li>Module 5: Race pace and tyre deg:
+    <ul>
+      <li>This section mainly focuses on long sting data, it shows me a scatter plot of laptime vs lap number which allows us to see progression in laptime as tyres die out or as fuel level drops.</li>
+      <li>It also gives us an idea on how much compromise a team took for race pace over 1 lap qualifying pace.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="my-learning">My learning:</h3>
+
+<ul>
+  <li>This project was a deep look into how engineers optimize a “set up”. It gave me a good understanding on how to spot differences as well as theorize on possible causes.</li>
+  <li>It also gave me experience working with data and how to visualize it. Even tho majority of the project was vibe coded, i spent a good amount of time debugging plots and understanding how to read it.</li>
+  <li>Overall I still use it to compare driver and car differences to see where my favorite teams lack or gain.</li>
+</ul>
+</p>
+	  
+          
+	  
+	  <header class="major">
+	    <h1>1-Way Fluid-Structure Interaction (FSI) Parametric Optimization of a Wing</h1>
+	  </header>
+	  <span class="image main"><img src="//assets/images/deformation_plot.png" alt="" /></span>
+	  
+		  <p style="opacity: 0.7; font-size: 0.9em; margin-top: -1em; letter-spacing: 1px;">
+		    POSTED ON 
+		  </p>
+		
+	  <p><h2 id="project-overview--engineering-objectives">Project Overview &amp; Engineering Objectives</h2>
+
+<p>In high-performance vehicle dynamics, aerodynamic surfaces must generate  downforce while maintaining structural integrity under aerodynamic loads. Elastic deformation of an airfoil alters its effective angle of attack, leading to unpredictable aerodynamic effects.</p>
+
+<p>This project shows a 1-Way Fluid-Structure Interaction (FSI) computational workflow using Ansys. By fully coupling a steady-state CFD simulation to a  structural model, the structural effects due to aero forces on a solid Carbon Fiber wing section was evaluated across a range of 20 m/s to 55 m/s.</p>
+
+<h3 id="key-technical-focus-areas">Key Technical Focus Areas:</h3>
+
+<ul>
+  <li><strong>Aerodynamic Characterization:</strong> Computational Fluid Dynamics (CFD) mapping of NACA 4412 of size 250x500</li>
+  <li><strong>1-Way Load Interpolation:</strong> Surface mesh mapping to accurately transfer fluid pressure matrices to structural simulation.</li>
+  <li><strong>Parametric Optimization:</strong> Automated design-point sweeping to evaluate structural scaling under aerodynamic force.</li>
+</ul>
+
+<hr />
+
+<h2 id="computational-workflow-architecture">Computational Workflow Architecture</h2>
+
+<p>To execute the coupled simulation, a pipeline was constructed inside Ansys Workbench, linking a finite volume fluid solver directly to a finite element structural solver.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Fluid Domain: Fluent] ---&gt; (Pressure Data Transfer) ---&gt; [Structural Domain: Mechanical]
+</code></pre></div></div>
+
+<p align="center">
+  <img src="/assets/images/process_diagram.png" alt="Ansys FSI Workflow Schematic" width="75%" />
+  <br /><em>Figure 1: The project schematic showing the automated transfer where pressure cells from the Fluent solution are shared with the Static Structural setup cell.</em>
+</p>
+
+<hr />
+
+<h2 id="aerodynamic-performance-analysis-cfd">Aerodynamic Performance Analysis (CFD)</h2>
+
+<h3 id="fluid-domain-setup">Fluid Domain Setup:</h3>
+
+<ul>
+  <li><strong>Solver:</strong> Pressure-Based Finite Volume Solver.</li>
+  <li><strong>Turbulence Modeling:</strong> Enhanced turbulence solver to capture adverse pressure gradients along the aft portion of the chord.</li>
+  <li><strong>Mesh Resolution:</strong> 880,000-cell fluid enclosure, also features a refined wake inflation layer.</li>
+</ul>
+
+<h3 id="mesh-discretization-domain-sizing-and-inflation-strategy">Mesh Discretization: Domain Sizing and Inflation Strategy</h3>
+
+<p>The accuracy of this FSI analysis relied heavily on a well-meshed grid across both physics domains. For the fluid domain, a finite volume mesh of approximately 880,000 cells was generated within the fluid enclosure. Global element sizing was managed, with a localized body sizing constraint applied around the airfoil to capture velocity gradients. A structured boundary layer inflation profile was embedded along the active wing skin, utilizing 10 layers with a 1.25 growth rate to guarantee boundary-layer resolution and accurate surface pressure mapping.</p>
+
+<p>For the structural simulation, hex-dominant mesh was selected to handle the solid body volume. The element sizing was parametrically altered, transitioning from an initial fine 4 mm grid down to a relatively bigger 12 mm grid. This strategic sizing shift drastically reduced the node count to fit comfortably within transfer licensing limits {student license} while perfectly preserving the geometric curvature of the nose and capturing the peak bending stress gradients at the cantilevered root joint.</p>
+
+<h3 id="velocity-field-profile">Velocity Field Profile:</h3>
+
+<p>As fluid approaches the leading edge, it splits, forcing high-velocity flow lines along the lower camber of the wing profile. This local velocity acceleration generates a localized drop in static pressure according to Bernoulli’s principle.</p>
+
+<p align="center">
+  <img src="/assets/images/streamline_plot.png" alt="Velocity field streamlines" width="85%" />
+  <br /><em>Figure 2: Velocity streamlines wrapping around the airfoil profile, illustrating localized acceleration underneath the main element belly to maximize lift.</em>
+</p>
+
+<h3 id="surface-pressure-mapping">Surface Pressure Mapping:</h3>
+
+<p>At the baseline velocity of 40 m/s, the aerodynamic profile produces a crisp, high-resolution pressure gradient. The upper surface exhibits positive stagnation pressure, while the lower suction surface experiences a deep negative pressure plunge.</p>
+
+<p align="center">
+  <img src="/assets/images/pressure_plot.png" alt="Surface Pressure Mapping" width="85%" />
+  <br /><em>Figure 3: High-resolution 3D surface pressure mapping from the Fluent database. Stagnation fields peak at +932.75 Pa at the leading-edge nose (red), while suction forces drop to a massive peak vacuum of -3,150.7 Pa along the lower surface (blue).</em>
+</p>
+
+<hr />
+
+<h2 id="structural-failure--rigidity-analysis-fea">Structural Failure &amp; Rigidity Analysis (FEA)</h2>
+
+<h3 id="structural-model-configuration">Structural Model Configuration:</h3>
+
+<ul>
+  <li><strong>Material Assignment:</strong> Continuous Solid Carbon Fiber Composite(230 GPa).</li>
+</ul>
+
+<h3 id="boundary-conditions">Boundary Conditions:</h3>
+
+<ul>
+  <li><strong>Fixed Support (Root):</strong> A 100% rigid cantilevered boundary condition was assigned to the flat root mounting face, replicating a center-pylon integration.</li>
+  <li><strong>Imported Aerodynamic Load:</strong> The 3D continuous pressure matrix from the fluid wall boundary was successfully interpolated across the mechanical surface elements.</li>
+</ul>
+
+<h3 id="displacement-results">Displacement Results:</h3>
+
+<p>Under the peak downforce condition, structural deflection is maximum at the unconstrained wingtip.</p>
+
+<p align="center">
+  <img src="/assets/images/deformation_plot.png" alt="Total Deformation Distribution" width="85%" />
+  <br /><em>Figure 4: Total deformation distribution under peak aerodynamic loading. Deflection aligns perfectly with  cantilevered beam formulas, maximizing at the outboard tip edge.</em>
+</p>
+
+<h3 id="von-mises-stress-analysis">Von-Mises Stress Analysis:</h3>
+
+<p>Internal mechanical stresses propagate through the core geometry, concentrating at the sharp root constraints where the structural bending moment is highest.</p>
+
+<p align="center">
+  <img src="/assets/images/stress_plot.png" alt="Equivalent von-Mises Stress Fields" width="85%" />
+  <br /><em>Figure 5: Equivalent von-Mises stress fields. The peak stress concentration occurs directly at the root-support geometric junction (red), safely dissipating into the solid main body.</em>
+</p>
+
+<hr />
+
+<h2 id="parametric-sweep--scaling-verification">Parametric Sweep &amp; Scaling Verification</h2>
+
+<p>By assigning velocity as an input parameter and downforce, deflection, and stress as output variables, Workbench automated an 8-point design sweep. This mapped out the complete structural performance trajectory of the wing element across the entire range.</p>
+
+<h3 id="compiled-project-data-matrix">Compiled Project Data Matrix</h3>
+
+<p align="center">
+  <img src="/assets/images/final_result.png" alt="Parametric Sweep Data Matrix" width="85%" />
+  <br /><em>Figure 6: The completed Workbench parametric matrix showcasing data across all design speeds.</em>
+</p>
+
+<hr />
+
+<h2 id="aerodynamic--structural-scaling-curves">Aerodynamic &amp; Structural Scaling Curves</h2>
+
+<p>To map out the discrete behavioral relationships across our system variables, the coupled outputs from the design sweep points were compiled into curves to really show the relationship between them</p>
+
+<p align="center">
+  <img src="/assets/images/fsi_performance_curves_matched.png" alt="FSI Performance Scaling Curves" width="90%" />
+  <br /><em>Figure 7: Parametric scaling plots charting Max Total Deformation, Max Equivalent Von-Mises Stress, and Aerodynamic Downforce across the operating velocity spectrum.</em>
+</p>
+
+<ul>
+  <li><strong>Max Deflection vs. Velocity:</strong> Visualizes the deflection gradient, showing a  exponential rise to the peak value of 0.125 mm at 55 m/s.</li>
+  <li><strong>Max Von-Mises Stress vs. Velocity:</strong> Highlights the internal mechanical stress response tracking alongside increasing airspeed up to the 0.853 MPa threshold.</li>
+  <li><strong>Aerodynamic Downforce Scaling:</strong> Explicitly captures the quadratic downforce validation trajectory, confirming the fluid model accurately tracks classical physics relationships before structural mesh mapping.</li>
+</ul>
+
+<hr />
+
+<h2 id="comprehensive-engineering-insights">Comprehensive Engineering Insights</h2>
+
+<h3 id="1-quadratic-force-translation">1. Quadratic Force Translation</h3>
+
+<p>The aerodynamic downforce vector scales quadratically relative to velocity according to the standard relationship:
+\(F_d = \frac{1}{2} \rho V^2 C_d A\)</p>
+
+<p>Because the solid carbon fiber matrix remains within its linear elastic region, the mechanical simulation matches this behavior perfectly. When the vehicle speed climbs from 20 m/s to 55 m/s (a <strong>2.75x</strong> increase), the max internal stress increases by a factor of <strong>7.48x</strong> (<strong>0.114 MPa</strong> to <strong>0.853 MPa</strong>), matching the predictable <strong>2.75²</strong> exponential scaling.</p>
+
+<h3 id="2-high-performance-structural-stiffness">2. High-Performance Structural Stiffness</h3>
+
+<p>At the absolute peak operating speed of 55 m/s (~200 km/h or 123 mph), the wing element experiences a maximum structural deflection of only 0.125 mm at the outboard tip. This tiny deflection value confirms that a solid carbon fiber layout delivers immense structural rigidity, preventing any adverse twisting that could cause aerodynamic stalling.</p>
+
+<h3 id="3-ultimate-safety-factor-evaluation">3. Ultimate Safety Factor Evaluation</h3>
+
+<p>The peak equivalent stress observed under full velocity loading is 0.853 MPa. High-quality motorsport-grade carbon fiber laminates typically boast an ultimate tensile strength exceeding 500–1000 MPa. This confirms that this solid geometry baseline operates with an exceptionally conservative factor of safety, opening up substantial opportunities to optimize the wing through topological lightweighting or shell hollow-coring in future designs.</p>
+
+<p>You may notice these numbers dont really co-relate to the real world, it led me to think of an error I made, I have mentioned more about the mistakes I made at the end.</p>
+
+<hr />
+
+<h2 id="pipeline-troubleshooting--management">Pipeline Troubleshooting &amp; Management</h2>
+
+<p>A critical component of this engineering study involved managing the shared geometry upstream data pipeline across conflicting physics solvers:</p>
+
+<ul>
+  <li><strong>The Challenge:</strong> Activating the solid physics parameters for FEA mechanical meshing introduced an unhandled boundary intersecting the background fluid enclosure mesh, causing a global downstream data invalidation error across the design points.</li>
+  <li><strong>The Resolution:</strong> Implemented selective Mesh Component Suppression Filters within the separate solvers. The fluid solver was instructed to mesh only the hollow enclosure cavity while suppressing the solid wing body. Conversely, the structural solver was locked to mesh only the solid body volume while suppressing the enclosure.</li>
+  <li><strong>Future Best Practice:</strong> To fully decouple upstream CAD modifications from downstream sweeps, future iterations will implement boundary-face Named Selections directly within the geometry interface. This isolates the data-transfer pipeline and allows for quick material or mesh updates without triggering full fluid domain recalculations.</li>
+</ul>
+
+<h2 id="mistakes-i-made">Mistakes I made:</h2>
+
+<p>Even though I was able to show the relation between Aerodynamic loading and its effects on materials I made a few errors during and after I uploaded this project. I would like to highlight my new learnings below :</p>
+
+<ul>
+  <li><strong>The Wing:</strong> A real wing in implementation would never actually be fully made of a single big block of carbon fiber, it would be a skin of carbon fiber on spars and struts, when i designed the geometry i didnt give much thought to that and ended up doing the entire simulation assuming the wing was made out of a fully solid block of carbon fiber</li>
+  <li><strong>The Meshing:</strong> Initially I did not understand the necessity for a good mesh, I gave an arbritary number that I came up with as the cell size and continued with it, I then learnt about the requirement of a mesh for accurate results, I spent a good fraction of my time then learning how to mesh especially for airfoils using both local sizing and inflation layers. I was however limited by my student license thus couldn’t run the most optimized mesh but the errors would be marginal.</li>
+</ul>
+</p>
+	  
+          
+	  
+	  <header class="major">
+	    <h1>Transient Structural Analysis: 680mm Performance Rim</h1>
+	  </header>
+	  <span class="image main"><img src="//assets/images/wheel_stress.jpg" alt="" /></span>
+	  
+		  <p style="opacity: 0.7; font-size: 0.9em; margin-top: -1em; letter-spacing: 1px;">
+		    POSTED ON 
+		  </p>
+		
+	  <p><h3 id="the-motivation">The Motivation</h3>
+
+<p>This project was born out of a  curiosity about material limits during dynamic load changes. While my coursework focuses on static equilibrium, I wanted to simulate the real-world “ramp-up” and “ramp-down” phases of a wheel’s rotation to observe how inertial effects influence the stress-time history of Aluminum 6061-T6.</p>
+
+<h3 id="the-physics-of-the-cycle">The Physics of the Cycle</h3>
+
+<p>The simulation covers a 2.0s transient window. The centrifugal stress ( \sigma ) is governed by the angular velocity ( \omega ):</p>
+
+\[\sigma \approx \rho \cdot r^2 \cdot \omega^2\]
+
+<p>To ensure accuracy in a transient environment, the solver integrates the fundamental equation of motion:</p>
+
+\[[M]{\ddot{u}} + [C]{\dot{u}} + [K]{u} = {F(t)}\]
+
+<h3 id="methodology--mesh-validation">Methodology &amp; Mesh Validation</h3>
+
+<ul>
+  <li><strong>Mesh Quality:</strong> Using the <strong>Mesh Metric</strong> tool, I verified that the average <strong>Skewness</strong> was <strong>0.22</strong>, with zero elements exceeding the 0.9 failure threshold. This ensures the gradients are accurate.</li>
+  <li><strong>Stress Probing:</strong> Rather than just looking at global maximums, I placed a <strong>Stress Probe</strong> at the spoke-root interface  where I expected to capture the exact stress-time history throughout the 1500 RPM cycle.</li>
+</ul>
+
+<h3 id="key-data--results">Key Data &amp; Results</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Result</th>
+      <th>Engineering Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Peak Von-Mises Stress</strong></td>
+      <td>55.37 MPa</td>
+      <td>Occurred at the 1.0s peak velocity.</td>
+    </tr>
+    <tr>
+      <td><strong>Total Deformation</strong></td>
+      <td>15.8 $\mu$m</td>
+      <td>Global radial expansion of the rim bed.</td>
+    </tr>
+    <tr>
+      <td><strong>Fatigue Life (Cycles)</strong></td>
+      <td>$&gt; 1 \times 10^8$</td>
+      <td>Estimated using the Ansys Fatigue Tool (S-N Curve).</td>
+    </tr>
+    <tr>
+      <td><strong>Safety Factor (Yield)</strong></td>
+      <td>8.18</td>
+      <td>Based on $S_y = 276 \text{ MPa}$ for Al 6061-T6.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="conclusion-data-interpretation">Conclusion: Data Interpretation</h3>
+
+<p>The <strong>Total Deformation</strong> of 15.8 $\mu$m is negligible, confirming the rim retains its geometric intent under centrifugal load. However, the <strong>Stress Probe</strong> data reveals that the stress follows the $\omega^2$ curve almost perfectly, with no significant lagging from damping ($[C]$).</p>
+
+<p>With a fatigue life exceeding $10^8$ cycles at 55 MPa, the component is effectively in the “infinite life” regime for this load case. This suggests that the current design is <strong>conservative</strong>; we could reduce the spoke thickness by 20% to lower unsprung mass while still maintaining a safe margin for lateral cornering impacts.</p>
+
+<h3 id="personal-reflection-what-i-learnt">Personal Reflection: What I Learnt</h3>
+
+<p>Building this project outside of my EIM class taught me three critical things:</p>
+
+<ol>
+  <li><strong>The Solver is a Tool:</strong> I initially had a mesh that was too coarse, leading to “stress singularities.” Learning to use Mesh Metrics like Skewness taught me to question the computer’s output.</li>
+  <li><strong>Time-Stepping Matters:</strong> In my first run, I used too few sub-steps, and the results didn’t capture the peak stress correctly. I learnt that transient analysis requires a balance between computational cost and temporal resolution.</li>
+  <li><strong>The Engineering Mindset:</strong> Designing for “static” strength isn’t enough for high-performance automotive parts. Moving from yield analysis to <strong>Fatigue Life</strong> estimation changed how I look at material selection.</li>
+</ol>
+
+<hr />
+
+<p><em>Note: This simulation is a personal project focusing on FEA workflows.</em></p>
+</p>
+	  
+          
+	</div>
+      </section>
+
+    </div>
+
+    <style>
+    .hub-footer {
+        background-color: #2a2f4a; 
+        border-top: 2px solid rgba(255, 255, 255, 0.1); 
+        padding: 5em 0;
+    }
+    .hub-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2em;
+        margin-top: 3em;
+    }
+    .hub-column {
+        flex: 1;
+        min-width: 250px;
+    }
+    .hub-column h3 {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5em;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 736px) {
+        .hub-grid { flex-direction: column; gap: 3em; }
+    }
+</style>
+
+<div class="hub-footer">
+    <div class="inner">
+        <header class="major">
+            <h2>Get in Touch</h2>
+        </header>
+
+        <div class="hub-grid">
+            
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-envelope"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:athiben.ananth@gmail.com" style="border-bottom: none;">athiben.ananth@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-home"></span>
+                    <h3>Location</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        VIT<br />
+                        Vellore, Tamil Nadu<br />
+                        India
+                    </p>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-share-alt"></span>
+                    <h3>Connect</h3>
+                    <ul class="icons" style="margin: 0; padding: 0;">
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://github.com/AthibenAnanth" class="icon alt fa-github" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">GitHub</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://linkedin.com/in/athiben-ananth-mstrcdr110322" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">LinkedIn</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 6em; padding-top: 2em; border-top: 1px solid rgba(255, 255, 255, 0.05); opacity: 0.3; font-size: 0.8em;">
+            &copy; Athiben Ananth | Engineering Hub | Undergraduate Student @ VIT<br />
+            Design adapted from HTML5 UP
+        </div>
+    </div>
+</div>
+
+<script src="https://athibenananth.github.io/assets/js/jquery.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/skel.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/util.js"></script>
+<script src="https://athibenananth.github.io/assets/js/main.js"></script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </body>
+
+</html>

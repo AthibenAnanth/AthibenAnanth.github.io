@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Custom F1 Telemetry analysis tool using FastF1 Database | Athiben Ananth | Engineering Hub</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+</head>
+
+
+<body>
+
+    <div id="wrapper">
+
+<header id="header">
+    <a href="https://athibenananth.github.io/" class="logo"><strong>Athiben Ananth | Engineering Hub</strong> <span>Undergraduate Student @ VIT</span></a>
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/fea-hub/">FEA Simulations</a></li>
+        <li><a href="/f1-data/">F1 Data Science</a></li>
+        <li><a href="/cad-robotics/">CAD & Robotics</a></li>
+    </ul>
+</nav>
+
+ 
+    
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+    <div class="inner">
+        <header class="major">
+            <h1>Custom F1 Telemetry analysis tool using FastF1 Database</h1>
+            <p style="opacity: 0.7; font-size: 0.9em; margin-top: -1em; letter-spacing: 1px;">
+              POSTED ON SEPTEMBER 14, 2026
+            </p>
+        </header>
+        <span class="image main"><img src="//assets/images/f1_telemetry.png" alt="" /></span>
+        <h3 id="the-objective">The Objective</h3>
+
+<p>I enjoy watching Formula 1 and the technical side of things always interests me, I actively look out for telemetry in the live broadcast and post race analysis available online in multiple forms. This got me thinking, could i make a tool that can help me retrieve and visualize data for me to understand.</p>
+
+<h3 id="the-code-architecture">The Code Architecture:</h3>
+
+<ul>
+  <li>Framework and UI: I used streamlit for this, it was relatively easier to understand and gave very clean lookign UIs.</li>
+  <li>Data &amp; processing: I looked at many sources for data, after a little bit of research i was left with 2 options, FastF1 and OpenF1, I decided to use FastF1 mainly because I wanted to be able to run the project offline with cached data instead of API calls, I would have loved to have access to live telemetry during the race but OpenF1 restricts the number of calls per min on the free plan.</li>
+  <li>Visualization: Using Plotly I was able to make graphs and other data visualization techniques.</li>
+</ul>
+
+<h3 id="the-analytical-modules">The Analytical Modules</h3>
+
+<p>For ease of programming, each major statistic was made into its own “Module”, thus far I have implemented 5 Major modules, these cover a wide array of data from lap by lap data to race pace and stint data.</p>
+
+<ul>
+  <li>Module 1: Lap telemetry and time delta mapping:</li>
+  <li>This module focuses mainly on comparison of basic telemetry like speed, brake %, throttle % etc, this data is visualized with plots against time to clearly observe how it varies thru a lap. The extreme values are also shown to get a idea of the range.A calculated statistic from this would be the plot of time delta across a lap. I can analyze up to 6 different laps from any session any driver simultaneously,  this helps visualize how factors like driver confidence, set up changes etc effect lap time across sessions.  <img src="/assets/images/nor_vs_ant_SPA_Q.png" alt="" title="Ananlysis of Norris's and Antonelli's qualifying laps in Q3 of the new spanish grand prix where norris almost lost a huge 0.35+s lead in the last corner leading to a total delta of 0.011s" /></li>
+  <li>Module 2: Track dominance:
+    <ul>
+      <li>I’ve always looked at the track domination images, especially in 26, we can clearly see how dominant Ferrari are in the corners due to a superior chassis yet they loose out on straight line power to Mercedes due to a weaker power unit.</li>
+      <li>The script calculates the highest average speed in each sector and maps the dominant driver to the geometric track layout, instantly highlighting which car favors high-speed corners versus heavy traction zones.</li>
+      <li>This also lets us visualize how much the drivers are pushing and at what location are they most comfortable in doing so.</li>
+    </ul>
+  </li>
+  <li>Module 3: Track Position across lap:
+    <ul>
+      <li>This module takes GPS coords and maps it across the lap, this is very useful to check visually which driver is ahead where and where the driver is loosing most of their time to their rivals.</li>
+      <li>Since we can control the time along the lap, we can freeze it at any point and check out the difference between the laps.</li>
+    </ul>
+  </li>
+  <li>Module 4: Advanced Lap &amp; Corner Metrics:
+    <ul>
+      <li>This section is probably the most fascinating, it gives us a deeper look into the lap by lap differences. It also shows basic lap and tyre data like compound, tyre life, sector times etc.</li>
+      <li>Each lap has a detailed breakdown, this includes statistics like:
+        <ul>
+          <li>Apex speeds at different corners</li>
+          <li>Time to 100% throttle</li>
+          <li>Total time spent braking</li>
+          <li>Avg L&amp;C time ( transition btwn braking and trottle)</li>
+          <li>Max &amp; Min recorded speed</li>
+        </ul>
+      </li>
+      <li>It also shows a 0-200 time for starting laps, this was very useful to visualize the superior starts by Ferrari due to a smaller turbo and faster spool up time which gave them very good speeds into turn 1.</li>
+    </ul>
+  </li>
+  <li>Module 5: Race pace and tyre deg:
+    <ul>
+      <li>This section mainly focuses on long sting data, it shows me a scatter plot of laptime vs lap number which allows us to see progression in laptime as tyres die out or as fuel level drops.</li>
+      <li>It also gives us an idea on how much compromise a team took for race pace over 1 lap qualifying pace.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="my-learning">My learning:</h3>
+
+<ul>
+  <li>This project was a deep look into how engineers optimize a “set up”. It gave me a good understanding on how to spot differences as well as theorize on possible causes.</li>
+  <li>It also gave me experience working with data and how to visualize it. Even tho majority of the project was vibe coded, i spent a good amount of time debugging plots and understanding how to read it.</li>
+  <li>Overall I still use it to compare driver and car differences to see where my favorite teams lack or gain.</li>
+</ul>
+
+    </div>
+</section>
+
+</div>
+
+    <style>
+    .hub-footer {
+        background-color: #2a2f4a; 
+        border-top: 2px solid rgba(255, 255, 255, 0.1); 
+        padding: 5em 0;
+    }
+    .hub-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2em;
+        margin-top: 3em;
+    }
+    .hub-column {
+        flex: 1;
+        min-width: 250px;
+    }
+    .hub-column h3 {
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5em;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 736px) {
+        .hub-grid { flex-direction: column; gap: 3em; }
+    }
+</style>
+
+<div class="hub-footer">
+    <div class="inner">
+        <header class="major">
+            <h2>Get in Touch</h2>
+        </header>
+
+        <div class="hub-grid">
+            
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-envelope"></span>
+                    <h3>Email</h3>
+                    <a href="mailto:athiben.ananth@gmail.com" style="border-bottom: none;">athiben.ananth@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-home"></span>
+                    <h3>Location</h3>
+                    <p style="margin: 0; line-height: 1.6;">
+                        VIT<br />
+                        Vellore, Tamil Nadu<br />
+                        India
+                    </p>
+                </div>
+            </div>
+
+            <div class="hub-column">
+                <div class="contact-method">
+                    <span class="icon alt fa-share-alt"></span>
+                    <h3>Connect</h3>
+                    <ul class="icons" style="margin: 0; padding: 0;">
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://github.com/AthibenAnanth" class="icon alt fa-github" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">GitHub</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <li style="display: inline-block; margin-right: 1.5em;">
+                                    <a href="https://linkedin.com/in/athiben-ananth-mstrcdr110322" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer">
+                                        <span class="label">LinkedIn</span>
+                                    </a>
+                                </li>
+                            
+                        
+                            
+                        
+                            
+                        
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 6em; padding-top: 2em; border-top: 1px solid rgba(255, 255, 255, 0.05); opacity: 0.3; font-size: 0.8em;">
+            &copy; Athiben Ananth | Engineering Hub | Undergraduate Student @ VIT<br />
+            Design adapted from HTML5 UP
+        </div>
+    </div>
+</div>
+
+<script src="https://athibenananth.github.io/assets/js/jquery.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/skel.min.js"></script>
+<script src="https://athibenananth.github.io/assets/js/util.js"></script>
+<script src="https://athibenananth.github.io/assets/js/main.js"></script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- CMS Image & Caption Automation -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find ALL images inside the post body
+    const postImages = document.querySelectorAll("section#one .inner img");
+    
+    postImages.forEach(img => {
+      // Skip the main featured banner image at the top of the page
+      if (img.parentElement.classList.contains("image") && img.parentElement.classList.contains("main")) return;
+      
+      // Force the image to become a centered block, even if it's inside a bullet point
+      img.style.display = "block";
+      img.style.maxWidth = "85%";
+      img.style.height = "auto";
+      img.style.margin = "2rem auto 0.5rem auto";
+      
+      // Generate the italic caption from the Title field
+      if (img.title) {
+        const caption = document.createElement("span");
+        caption.innerHTML = "<em>" + img.title + "</em>";
+        caption.style.display = "block";
+        caption.style.textAlign = "center";
+        caption.style.opacity = "0.8";
+        caption.style.marginBottom = "2rem";
+        img.insertAdjacentElement("afterend", caption);
+      }
+    });
+  });
+</script>
+    
+</body>
+
+</html>
