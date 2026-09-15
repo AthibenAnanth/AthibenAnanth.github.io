@@ -34,6 +34,36 @@
 
     {% include footer.html %}
 
+<!-- CMS Image & Caption Automation -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find all images inside the post body
+    const postImages = document.querySelectorAll("section#one .inner p img");
+    
+    postImages.forEach(img => {
+      // 1. Center the paragraph containing the image
+      const p = img.parentElement;
+      p.style.textAlign = "center";
+      
+      // 2. Set image width (matching your preferred 85%)
+      img.style.maxWidth = "85%";
+      img.style.height = "auto";
+      img.style.margin = "0 auto";
+      img.style.display = "inline-block";
+      
+      // 3. If a "Title" was entered in the CMS, generate the italic caption
+      if (img.title) {
+        const caption = document.createElement("span");
+        caption.innerHTML = "<br><em>" + img.title + "</em>";
+        caption.style.display = "block";
+        caption.style.marginTop = "5px";
+        caption.style.opacity = "0.8"; // Slightly dims text to match theme
+        img.insertAdjacentElement("afterend", caption);
+      }
+    });
+  });
+</script>
+    
 </body>
 
 </html>
